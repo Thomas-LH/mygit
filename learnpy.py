@@ -25,6 +25,8 @@ def dedupe(items, key=None):
             yield item
             seen.add(val)
 
+
+
 if __name__ == '__main__':
     a = [ {'x':1, 'y':2}, {'x':1, 'y':3}, {'x':1, 'y':2}, {'x':2, 'y':4}]
     print(list(dedupe(a, key=lambda d: (d['x'],d['y']))))
