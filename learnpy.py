@@ -1,5 +1,6 @@
 import heapq
 import html
+import functools
 
 class PriorityQueue:
     def __init__(self):
@@ -51,6 +52,25 @@ def make_element(name, value, **attrs):
     element = '<{name}{attrs}>{value}</{name}>'.format(name=name, attrs=attr_str, 
     value=html.escape(value))
     return element
+
+def log(text=None):
+    if text is None:
+        text = ''
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('{}{}()'.format(text,func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@log()
+def now():
+    return '2018-08-02'
+
+@log('calling ')
+def time():
+    return '17:16'
 
 if __name__ == '__main__':
 #    a = [ {'x':1, 'y':2}, {'x':1, 'y':3}, {'x':1, 'y':2}, {'x':2, 'y':4}]
