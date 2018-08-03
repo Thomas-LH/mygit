@@ -1,6 +1,7 @@
+import functools
 import heapq
 import html
-import functools
+import sys
 
 class PriorityQueue:
     def __init__(self):
@@ -72,6 +73,29 @@ def now():
 def time():
     return '17:16'
 
+class ClosureInstane:
+    def __init__(self, locals=None):
+        if locals is None:
+            locals = sys._getframe(1).f_locals
+        
+        self.__dict__.update((key,value) for key, value in locals.items() if callable(value))
+
+    def __len__(self):
+        return self.__dict__['__len__']()
+
+def Stack():
+    items = []
+    def push(item):
+        items.append(item)
+
+    def pop():
+        return items.pop()
+
+    def __len__():
+        return len(items)
+
+    return ClosureInstane()
+    
 if __name__ == '__main__':
 #    a = [ {'x':1, 'y':2}, {'x':1, 'y':3}, {'x':1, 'y':2}, {'x':2, 'y':4}]
 #    print(list(dedupe(a, key=lambda d: (d['x'],d['y']))))
