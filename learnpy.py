@@ -112,6 +112,23 @@ class Student(object):
             raise ValueError('score must between 0~100!')
         self._score = value 
 
+class Chain(object):
+    def __init__(self, path=''):
+        self._path = path
+
+    def __getattr__(self, path):
+        print('call __getattr__(%s)'% path)
+        return Chain('%s/%s' % (self._path, path))
+
+    def __str__(self):
+        return self._path
+
+    def __call__(self, param):
+        print('call __call__(%s)' % param)
+        return Chain('%s/%s' % (self._path, param))
+
+    __repr__ = __str__
+
 if __name__ == '__main__':
     '''
     a = [ {'x':1, 'y':2}, {'x':1, 'y':3}, {'x':1, 'y':2}, {'x':2, 'y':4}]
