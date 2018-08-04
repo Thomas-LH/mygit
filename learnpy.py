@@ -95,10 +95,27 @@ def Stack():
         return len(items)
 
     return ClosureInstane()
+
+class Student(object):
     
+    @property
+    def score(self):
+        if not hasattr(self, '_score'):
+            return 'No data!'
+        return self._score
+
+    @score.setter
+    def score(self, value):
+        if not isinstance(value, int):
+            raise ValueError('score must be an integer!')
+        if value < 0 or value > 100:
+            raise ValueError('score must between 0~100!')
+        self._score = value 
+
 if __name__ == '__main__':
-#    a = [ {'x':1, 'y':2}, {'x':1, 'y':3}, {'x':1, 'y':2}, {'x':2, 'y':4}]
-#    print(list(dedupe(a, key=lambda d: (d['x'],d['y']))))
+    '''
+    a = [ {'x':1, 'y':2}, {'x':1, 'y':3}, {'x':1, 'y':2}, {'x':2, 'y':4}]
+    print(list(dedupe(a, key=lambda d: (d['x'],d['y']))))
     root = Node(0)
     child1 = Node(1)
     child2 = Node(2)
@@ -110,3 +127,9 @@ if __name__ == '__main__':
 
     for ch in root.depth_first():
         print(ch)
+    
+
+    s = Stack()
+    s.push(10)
+    s.pop()
+    '''
