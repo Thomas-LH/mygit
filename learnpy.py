@@ -1,7 +1,9 @@
+import argparse
 import functools
 import heapq
 import html
 import sys
+
 
 class PriorityQueue:
     def __init__(self):
@@ -129,6 +131,15 @@ class Chain(object):
 
     __repr__ = __str__
 
+def argumentparser(argument_):  
+    parser = argparse.ArgumentParser(description='test argparse')
+    parser.add_argument('integers', metavar='int', type=int, nargs='+', help='need one int value at least')
+    parser.add_argument('-b', '--bprint', dest='bpr', action='store_const', const=print, help='beautiful print')
+    args_ = parser.parse_args(argument_)
+
+    if args_.bpr is not None:
+        args_.bpr('\n'.join('value{} = {}'.format(k,x) for k,x in enumerate(args_.integers)))
+
 if __name__ == '__main__':
     '''
     a = [ {'x':1, 'y':2}, {'x':1, 'y':3}, {'x':1, 'y':2}, {'x':2, 'y':4}]
@@ -150,3 +161,4 @@ if __name__ == '__main__':
     s.push(10)
     s.pop()
     '''
+    argumentparser(None)
